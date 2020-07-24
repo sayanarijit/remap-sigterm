@@ -1,5 +1,44 @@
-Papertrail logs
+How to reproduce
+----------------
 
+Run
+
+```bash
+export REDIS_URL=...
+
+python << EOF
+
+import tasks
+
+tasks.delay(1, 2)
+
+EOF
+```
+
+Then within 300 seconds (5 min) reboot the Heroku worker.
+
+
+What should happen
+------------------
+
+- The task is queued by redis
+- Heroku worker starts executing the task which goes to a 5 min sleep.
+- When shutdown, Heroku worker sends SIGHUP (because REMAP_SIGTERM="SIGHUP") to the worker.
+- The worker exists immediately never acknowledging the task (the task stays in queue).
+- After the worker comes back, it fetched the task from queue and starts running again.
+
+What happens
+------------
+
+- The task is queued by redis
+- Heroku worker starts executing the task which goes to a 5 min sleep.
+- When shutdown, Heroku worker sends SIGTERM to the worker.
+- The worker wait for the process to exit.
+- After 30 seconds it kills the worker.
+- After the worker comes back, the queue is empty. Hence task is lost.
+
+Papertrail logs
+---------------
 ```
 Jul 24 05:12:38 remap-sigterm heroku/worker.1 Starting process with command `REMAP_SIGTERM=SIGQUIT celery -A tasks worker -l info`
 Jul 24 05:12:39 remap-sigterm heroku/worker.1 State changed from starting to up
