@@ -27,19 +27,19 @@ Then within 300 seconds (5 min) reboot the Heroku worker.
 What should happen
 ------------------
 
-- The task is queued by redis
-- Heroku worker starts executing the task which goes to a 5 min sleep.
+- The task is queued by redis.
+- Heroku worker starts executing the task which goes to a 5 min. sleep.
 - When shutdown, Heroku worker sends SIGQUIT (because REMAP_SIGTERM="SIGQUIT") to the worker.
 - The worker exists immediately never acknowledging the task (the task stays in queue).
-- After the worker comes back, it fetched the task from queue and starts running again.
+- After the worker comes back, it fetches the task from queue and starts running again.
 
 What happens
 ------------
 
-- The task is queued by redis
-- Heroku worker starts executing the task which goes to a 5 min sleep.
+- The task is queued by redis.
+- Heroku worker starts executing the task which goes to a 5 min. sleep.
 - When shutdown, Heroku worker sends SIGTERM to the worker.
-- The worker wait for the process to exit.
+- The worker waits for the process to exit.
 - After 30 seconds it kills the worker.
 - After the worker comes back, the queue is empty. Hence task is lost.
 
