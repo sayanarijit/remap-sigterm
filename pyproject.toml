@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "remap-sigterm"
+version = "0.1.0"
+description = "Test REMAP_SIGTERM in Heroku"
+authors = ["Arijit Basu <sayanarijit@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+celery = {extras = ["redis"], version = "^4.4.6"}
+black = "^19.10b0"
+flake8 = "^3.8.3"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
