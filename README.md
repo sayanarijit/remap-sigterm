@@ -15,7 +15,7 @@ python << EOF
 
 import tasks
 
-tasks.delay(1, 2)
+tasks.add.delay(1, 2)
 
 EOF
 ```
