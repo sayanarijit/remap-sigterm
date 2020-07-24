@@ -1,3 +1,8 @@
+Context
+-------
+
+[Using REMAP_SIGTERM](https://devcenter.heroku.com/articles/celery-heroku#using-remap_sigterm)
+
 How to reproduce
 ----------------
 
