@@ -9,15 +9,16 @@ How to reproduce
 Run
 
 ```bash
-export REDIS_URL=...
+poetry shell
+export REDIS_URL="<redis url>"
 
-python << EOF
+python
+```
 
+```python
 import tasks
 
 tasks.add.delay(1, 2)
-
-EOF
 ```
 
 Then within 300 seconds (5 min) reboot the Heroku worker.
