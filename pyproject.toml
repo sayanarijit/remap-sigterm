@@ -6,7 +6,7 @@ authors = ["Arijit Basu <sayanarijit@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
-celery = {extras = ["redis"], version = "^4.4.6"}
+celery = {extras = ["redis"], git = "https://github.com/sayanarijit/celery", rev = "master"}
 black = "^19.10b0"
 flake8 = "^3.8.3"
 
